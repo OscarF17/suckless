@@ -1,0 +1,16 @@
+#!/bin/bash
+# Redshift 
+redshift -O 3500 &
+/home/oscar/.config/suckless/dwm-bar/dwm_bar.sh &
+dwm
+
+
+"""
+while true; do
+    bat_per=$(acpi | awk '{print $4}')
+    bat_time=$(acpi | awk '{print $5}' | awk -F ':' '{print $1":"$2}')
+    hour=$(date | awk '{print $4}' | awk -F ':' '{print $1":"$2}')
+    xsetroot -name "$(date | awk '{print $1, $2, $3}') $hour $(date | awk '{print $5}') | $bat_per $bat_time"
+    sleep 10
+done &
+"""
