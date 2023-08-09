@@ -7,22 +7,29 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+// static const char *fonts[]          = { "monospace:size=12" };
+static const char *fonts[]          = { "monospace:size=12", "FontAwesome:size=12"};
+static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#82000f";
-// static const char col_cyan[]        = "#005577";
+/* static const char col_cyan[]        = "#005577"; */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
+/* Constants for media keys */
+static const char *upvol[]      = { "/usr/bin/amixer",  "set", "Master", "5%+", NULL };
+static const char *downvol[]    = { "/usr/bin/amixer",  "set", "Master", "5%-", NULL };
+static const char *mutevol[]    = { "/usr/bin/amixerl", "set", "Master", "toggle", NULL };
+static const char *light_up[]   = { "/usr/bin/light",   "-A", "5", NULL };
+static const char *light_down[] = { "/usr/bin/light",   "-U", "5", NULL };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -65,6 +72,11 @@ static const char *termcmd[]  = { "kitty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+    { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
+	{ 0,              XF86XK_AudioMute,        spawn,          {.v = mutevol } },
+	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
+    { 0,		      XF86XK_MonBrightnessUp,  spawn,	       {.v = light_up} },
+	{ 0,			  XF86XK_MonBrightnessDown,spawn,	       {.v = light_down} },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
