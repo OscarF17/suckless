@@ -25,7 +25,7 @@ export SEP2="]"
 #. "$DIR/bar-functions/dwm_alarm.sh"
 . "$DIR/bar-functions/dwm_alsa.sh"
 #. "$DIR/bar-functions/dwm_backlight.sh"
-. "$DIR/bar-functions/dwm_battery.sh"
+#. "$DIR/bar-functions/dwm_battery.sh"
 #. "$DIR/bar-functions/dwm_ccurse.sh"
 #. "$DIR/bar-functions/dwm_cmus.sh"
 #. "$DIR/bar-functions/dwm_connman.sh"
@@ -44,7 +44,7 @@ export SEP2="]"
 #. "$DIR/bar-functions/dwm_vpn.sh"
 #. "$DIR/bar-functions/dwm_weather.sh"
 #. "$DIR/bar-functions/dwm_network_speed.sh"
-. "$DIR/bar-functions/dwm_light.sh"
+#. "$DIR/bar-functions/dwm_light.sh"
 
 parallelize() {
     while true
@@ -62,11 +62,11 @@ while true
 do
     # Append results of each func one by one to the upperbar string
     upperbar=""
-    upperbar="$upperbar$(dwm_light)"
+    #upperbar="$upperbar$(dwm_light)"
     #upperbar="$upperbar$(dwm_alarm)"
     upperbar="$upperbar$(dwm_alsa)"
     #upperbar="$upperbar$(dwm_backlight)"
-    upperbar="$upperbar$(dwm_battery)"
+    #upperbar="$upperbar$(dwm_battery)"
     #upperbar="$upperbar$(dwm_ccurse)"
     #upperbar="$upperbar$(dwm_cmus)"
     #upperbar="$upperbar$(dwm_connman)"
@@ -92,5 +92,5 @@ do
     xsetroot -name "$upperbar"
     # Uncomment the line below to enable the lowerbar 
     #xsetroot -name "$upperbar;$lowerbar"
-    sleep 10
+    sleep 1
 done

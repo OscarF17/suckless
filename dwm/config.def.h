@@ -25,11 +25,14 @@ static const char *colors[][3]      = {
 static const char *upvol[]      = { "/usr/bin/amixer",  "set", "Master", "5%+", NULL };
 static const char *downvol[]    = { "/usr/bin/amixer",  "set", "Master", "5%-", NULL };
 static const char *mutevol[]    = { "/usr/bin/amixerl", "set", "Master", "toggle", NULL };
+static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
+static const char *mednextcmd[] = { "playerctl", "next", NULL };
+static const char *medprevcmd[] = { "playerctl", "previous", NULL };
 static const char *light_up[]   = { "/usr/bin/light",   "-A", "5", NULL };
 static const char *light_down[] = { "/usr/bin/light",   "-U", "5", NULL };
 
 /* tagging */
-static const char *tags[] = { "", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -37,8 +40,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "firefox",  NULL,       NULL,       1 << 0,       0,           -1 }, // Open firefox on tag 1
+	{ "waterfox", NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "discord",  NULL,       NULL,       1 << 3,       0,           -1 },
 };
 
 /* layout(s) */
@@ -55,7 +59,11 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
+/* Mod1Mask -> Alt
+ * Mod4Mask -> Super Mod1Mask -> Alt
+ * Mod4Mask -> Super key
+ */
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -75,6 +83,9 @@ static const Key keys[] = {
     { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
 	{ 0,              XF86XK_AudioMute,        spawn,          {.v = mutevol } },
 	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
+    { 0,              XF86XK_AudioPlay,        spawn,          {.v = medplaypausecmd } },
+    { 0,              XF86XK_AudioNext,        spawn,          {.v = mednextcmd } },
+    { 0,              XF86XK_AudioPrev,        spawn,          {.v = medprevcmd } },
     { 0,		      XF86XK_MonBrightnessUp,  spawn,	       {.v = light_up} },
 	{ 0,			  XF86XK_MonBrightnessDown,spawn,	       {.v = light_down} },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -88,6 +99,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ Mod1Mask,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
