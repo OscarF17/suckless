@@ -65,5 +65,8 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ datetime, "%s",           "%F %T" },
+    { cpu_perc, "[ CPU: %s%% ]",    NULL       },
+    { ram_perc, " [ RAM: %s%% ]",   NULL       },
+    { run_command, "[  %s%% ]", "amixer get Master | tail -n1 | sed -r 's/.*\\[(.*)%\\].*/\\1/'" },
+	{ datetime, " [   %s ]",       "%a %d-%m-%Y %I:%M %p" },
 };

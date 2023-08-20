@@ -7,6 +7,10 @@ Requirements
 ------------
 In order to build dwm you need the Xlib header files.
 
+On Fedora:
+sudo dnf install git make gcc libXft-devel libX11-devel libXinerama-devel
+Additional packages: spectacle, copyq, light
+
 
 Installation
 ------------
