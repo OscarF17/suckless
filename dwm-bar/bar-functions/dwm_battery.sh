@@ -11,16 +11,13 @@ dwm_battery () {
     STATUS=$(acpi | awk '{print $3}')
 
     printf "%s" "$SEP1"
-    if [ "$IDENTIFIER" = "unicode" ]; then
         if [ "$STATUS" = "Charging," ]; then
             printf " %s%% %s" "$CHARGE" "$TIME"
+        elif [ "$STATUS" = "Full," ]; then
+            printf " %s%% %s" "$CHARGE" 
         else
             printf " %s%% %s" "$CHARGE" "$TIME"
         fi
-    else
-        printf "BAT %s%% %s" "$CHARGE" "$TIME"
-    fi
-    printf "%s\n" "$SEP2"
 }
 
 dwm_battery
