@@ -4,6 +4,7 @@ redshift -O 4500 &
 # /home/oscar/.config/suckless/dwm-bar/dwm_bar.sh &
 slstatus &
 xsetroot -solid black & 
+copyq &
 # Fix Wi-Fi not turning on automatically
 #nmcli radio wifi on &
 dwm

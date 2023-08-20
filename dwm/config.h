@@ -61,7 +61,6 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 /* Mod1Mask -> Alt
- * Mod4Mask -> Super Mod1Mask -> Alt
  * Mod4Mask -> Super key
  */
 #define TAGKEYS(KEY,TAG) \
@@ -77,10 +76,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
+static const char *copycmd[]  = { "/usr/bin/copyq", "menu" }; 
+static const char *shotcmd[] = {"spectacle", "-brc" };
 
 #include "shiftview.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+    /* media keys */
     { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
 	{ 0,              XF86XK_AudioMute,        spawn,          {.v = mutevol } },
 	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
@@ -90,6 +92,8 @@ static const Key keys[] = {
     { 0,		      XF86XK_MonBrightnessUp,  spawn,	       {.v = light_up} },
 	{ 0,			  XF86XK_MonBrightnessDown,spawn,	       {.v = light_down} },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_v,      spawn,          {.v = copycmd} },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = shotcmd} },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
