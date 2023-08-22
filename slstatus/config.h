@@ -65,9 +65,11 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-    { cpu_perc, "[ CPU: %s%% ]",    NULL       },
-    { ram_perc, " [ RAM: %s%% ]",   NULL       },
-    { run_command, "[  %s%% ]", "amixer get Master | tail -n1 | sed -r 's/.*\\[(.*)%\\].*/\\1/'" },
-    { run_command, "[ %s ]", "/home/oscar/.config/suckless/dwm-bar/bar-functions/dwm_battery.sh" },
-	{ datetime, " [   %s ]",       "%a %d-%m-%Y %I:%M %p" },
+    { wifi_essid, "[%s ", "wlp2s0" } ,
+    { wifi_perc, " %s%%]", "wlp2s0" } ,
+    { cpu_perc, "[ %s%%]",    NULL       },
+    { ram_perc, "[ %s%%]",   NULL       },
+    { run_command, "[ %s%%]", "amixer get Master | tail -n1 | sed -r 's/.*\\[(.*)%\\].*/\\1/'" },
+    { run_command, "[%s]", "/home/oscar/.config/suckless/dwm-bar/bar-functions/dwm_battery.sh" },
+	{ datetime, " [  %s]",       "%a %d/%b/%Y %I:%M %p" },
 };

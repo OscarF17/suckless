@@ -8,7 +8,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 // static const char *fonts[]          = { "monospace:size=12" };
-static const char *fonts[]          = { "monospace:size=12", "FontAwesome:size=12"};
+static const char *fonts[]          = { "monospace:size=12", "FontAwesome:size=12" };
 static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -22,27 +22,29 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 /* Constants for media keys */
-static const char *upvol[]      = { "/usr/bin/amixer",  "set", "Master", "5%+", NULL };
-static const char *downvol[]    = { "/usr/bin/amixer",  "set", "Master", "5%-", NULL };
-static const char *mutevol[]    = { "/usr/bin/amixerl", "set", "Master", "toggle", NULL };
-static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
-static const char *mednextcmd[] = { "playerctl", "next", NULL };
-static const char *medprevcmd[] = { "playerctl", "previous", NULL };
-static const char *light_up[]   = { "/usr/bin/light",   "-A", "5", NULL };
-static const char *light_down[] = { "/usr/bin/light",   "-U", "5", NULL };
+static const char *upvol[]           = { "amixer",    "set", "Master", "5%+",    NULL };
+static const char *downvol[]         = { "amixer",    "set", "Master", "5%-",    NULL };
+static const char *mutevol[]         = { "amixer",    "set", "Master", "toggle", NULL };
+static const char *medplaypausecmd[] = { "playerctl", "play-pause",              NULL };
+static const char *mednextcmd[]      = { "playerctl", "next",                    NULL };
+static const char *medprevcmd[]      = { "playerctl", "previous",                NULL };
+static const char *light_up[]        = { "light",     "-A", "5",                 NULL };
+static const char *light_down[]      = { "light",     "-U", "5",                 NULL };
 
 /* tagging */
-static const char *tags[] = { "", "", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "2", "", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "firefox",  NULL,       NULL,       1 << 0,       0,           -1 }, // Open firefox on tag 1
-	{ "waterfox", NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "discord",  NULL,       NULL,       1 << 3,       0,           -1 },
+	/* class            instance    title       tags mask     isfloating   monitor */
+	{ "firefox",        NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "waterfox",       NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "discord",        NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "kitty",          NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "libreoffice",    NULL,       NULL,       1 << 1,       0,           -1 },
 };
 
 /* layout(s) */
@@ -61,7 +63,6 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 /* Mod1Mask -> Alt
- * Mod4Mask -> Super Mod1Mask -> Alt
  * Mod4Mask -> Super key
  */
 #define TAGKEYS(KEY,TAG) \
@@ -76,11 +77,15 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[] = { "kitty",     NULL   };
+static const char *copycmd[] = { "copyq",     "menu" }; 
+static const char *shotcmd[] = { "spectacle", "-brc" };
+static const char *sshotsv[] = { "spectacle", "-br"  };
 
 #include "shiftview.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+    /* media keys */
     { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
 	{ 0,              XF86XK_AudioMute,        spawn,          {.v = mutevol } },
 	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
@@ -90,6 +95,9 @@ static const Key keys[] = {
     { 0,		      XF86XK_MonBrightnessUp,  spawn,	       {.v = light_up} },
 	{ 0,			  XF86XK_MonBrightnessDown,spawn,	       {.v = light_down} },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_v,      spawn,          {.v = copycmd} },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = shotcmd} },
+    { MODKEY|ShiftMask,             XK_Print,  spawn,          {.v = sshotsv} },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -142,4 +150,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
