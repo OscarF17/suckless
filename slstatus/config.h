@@ -63,13 +63,15 @@ static const char unknown_str[] = "n/a";
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  */
+
 static const struct arg args[] = {
 	/* function format          argument */
-    { wifi_essid, "[%s ", "wlp2s0" } ,
-    { wifi_perc, " %s%%]", "wlp2s0" } ,
+    // { wifi_essid, "[%s ", "wlp2s0" } ,
+    // { wifi_perc, " %s%%]", "wlp2s0" } ,
+    { run_command, "[ %s]", "cat /sys/class/net/enp27s0/operstate" }, 
     { cpu_perc, "[ %s%%]",    NULL       },
     { ram_perc, "[ %s%%]",   NULL       },
+    // { run_command, "[%s]", "/home/oscar/.config/suckless/dwm-bar/bar-functions/dwm_battery.sh" },
     { run_command, "[ %s%%]", "amixer get Master | tail -n1 | sed -r 's/.*\\[(.*)%\\].*/\\1/'" },
-    { run_command, "[%s]", "/home/oscar/.config/suckless/dwm-bar/bar-functions/dwm_battery.sh" },
 	{ datetime, " [  %s]",       "%a %d/%b/%Y %I:%M %p" },
 };
