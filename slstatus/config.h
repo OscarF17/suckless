@@ -66,12 +66,12 @@ static const char unknown_str[] = "n/a";
 
 static const struct arg args[] = {
 	/* function format          argument */
-    // { wifi_essid, "[%s ", "wlp2s0" } ,
-    // { wifi_perc, " %s%%]", "wlp2s0" } ,
-    { run_command, "[ %s]", "cat /sys/class/net/enp27s0/operstate" }, 
+    { wifi_essid, "[%s ", "wlp2s0" } ,
+    { wifi_perc, " %s%%]", "wlp2s0" } ,
+    // { run_command, "[ %s]", "cat /sys/class/net/enp27s0/operstate" }, 
     { cpu_perc, "[ %s%%]",    NULL       },
     { ram_perc, "[ %s%%]",   NULL       },
-    // { run_command, "[%s]", "/home/oscar/.config/suckless/dwm-bar/bar-functions/dwm_battery.sh" },
+    { run_command, "[%s]", "/home/oscar/.config/suckless/dwm-bar/bar-functions/dwm_battery.sh" },
     { run_command, "[ %s%%]", "amixer get Master | tail -n1 | sed -r 's/.*\\[(.*)%\\].*/\\1/'" },
 	{ datetime, "[ %s]",       "%a %d/%b/%Y %I:%M %p" },
 };

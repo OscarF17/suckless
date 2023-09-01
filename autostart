@@ -5,6 +5,8 @@ redshift -O 4500 &
 slstatus &
 xsetroot -solid black & 
 copyq &
+# Change keyboard layout automatically
+setxkbmap -layout latam,latam & 
 # Fix Wi-Fi not turning on automatically
 #nmcli radio wifi on &
 dwm
