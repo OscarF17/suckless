@@ -83,17 +83,26 @@ static const char *shotcmd[] = { "spectacle", "-brc" };
 static const char *sshotsv[] = { "spectacle", "-br"  };
 
 #include "shiftview.c"
+#define XF_Low  XF86XK_AudioLowerVolume
+#define XF_Mute XF86XK_AudioMute
+#define XF_High XF86XK_AudioRaiseVolume
+#define XF_Play XF86XK_AudioPlay
+#define XF_Next XF86XK_AudioNext 
+#define XF_Prev XF86XK_AudioPrev
+#define XF_BrUp XF86XK_MonBrightnessUp
+#define XF_BrDo XF86XK_MonBrightnessDown
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
     /* media keys */
-    { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
-	{ 0,              XF86XK_AudioMute,        spawn,          {.v = mutevol } },
-	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
-    { 0,              XF86XK_AudioPlay,        spawn,          {.v = medplaypausecmd } },
-    { 0,              XF86XK_AudioNext,        spawn,          {.v = mednextcmd } },
-    { 0,              XF86XK_AudioPrev,        spawn,          {.v = medprevcmd } },
-    { 0,		      XF86XK_MonBrightnessUp,  spawn,	       {.v = light_up} },
-	{ 0,			  XF86XK_MonBrightnessDown,spawn,	       {.v = light_down} },
+    { 0,                            XF_Low,    spawn,          {.v = downvol } },
+	{ 0,                            XF_Mute,   spawn,          {.v = mutevol } },
+	{ 0,                            XF_High,   spawn,          {.v = upvol   } },
+    { 0,                            XF_Play,   spawn,          {.v = medplaypausecmd } },
+    { 0,                            XF_Next,   spawn,          {.v = mednextcmd } },
+    { 0,                            XF_Prev,   spawn,          {.v = medprevcmd } },
+    { 0,		                    XF_BrUp,   spawn,	       {.v = light_up} },
+	{ 0,			                XF_BrDo,   spawn,	       {.v = light_down} },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_v,      spawn,          {.v = copycmd} },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = shotcmd} },
