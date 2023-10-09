@@ -1,20 +1,31 @@
-dwm - dynamic window manager
+# dwm - dynamic window manager
 ============================
 dwm is an extremely fast, small, and dynamic window manager for X.
 
 
-Requirements
+## Requirements
 ------------
 In order to build dwm you need the Xlib header files.
 
 On Fedora:
+Dependencies:
 sudo dnf install git make gcc libXft-devel libX11-devel libXinerama-devel
-Additional packages: spectacle, copyq, light
+
+Additional packages:
+sudo dnf install spectacle copyq light redshift playerctl
+- Spectacle: Screenshots
+- CopyQ: Clipboard manager
+- Light: Brightness control
+- Redshift: Blue light filter
+- Playerctl: Enable media keys
+
+Fonts:
+FontAwesome
 
 On Debian / Mint
 sudo apt install build-essential libx11-dev libxft-dev libxinerama-dev libfreetype6-dev libfontconfig1-dev
 
-Installation
+## Installation
 ------------
 Edit config.mk to match your local setup (dwm is installed into
 the /usr/local namespace by default).
@@ -25,7 +36,7 @@ necessary as root):
     make clean install
 
 
-Running dwm
+## Running dwm
 -----------
 Add the following line to your .xinitrc to start dwm using startx:
 
@@ -48,7 +59,26 @@ like this in your .xinitrc:
     exec dwm
 
 
-Configuration
+## Configuration
 -------------
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
+
+## Personal configurations
+
+### Fix touchpad controls
+Create a file on /etc/X11/xorg.conf.d named 0X-touchpad.conf (change X with whatever is the largest file number already in the directory)
+Paste the following:
+Section "InputClass"
+    Identifier "touchpad"
+    MatchIsTouchpad "on"
+    Option "Tapping" "on"
+    Option "ClickMethod" "buttonareas"
+    Option "DisableWhileTyping" "on"
+    Option "MiddleEmulation" "on"
+    Option "NaturalScrolling" "on"
+EndSection
+
+This will enable:
+- Button areas (clicking on right side of touchpad works as right click"
+- Natural scrollong: invert scrolling direction
